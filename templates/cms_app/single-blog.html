@@ -1,0 +1,72 @@
+{% extends 'cms_app/base.html' %}
+{% load static %}
+
+{% block title %}
+{% if single %} {{ single.pst_title }} {% endif %}
+{% endblock %}
+
+
+{% block content %}
+<section id="sectionTitle">
+  <div class="pageTitle">
+    <h1> {% if single %} {{ single.pst_title }} {% endif %}</h1>
+  </div>
+</section>
+<!-- END OF PAGE TITLE -->
+<section id="content">
+  <div class="row">
+    {% if single %}
+    <div class="col-sm-9 text-center" id="detailContent">
+      <div class="contain-img">
+        <div class="img-div" style="height: 250px">
+            <img src="{{ single.pst_image.url }}" class="img-responsive">
+        </div>
+        <p>
+          Time:{{ single.created_at }}, Category:<a href="sport.html">{{ single.category }}.</a>. 
+          
+        </p>
+      </div>
+      <div class="detail-content">
+        <h2>{{ single.pst_title }}</h2>
+        <p>
+          {{ single.content }}
+        </p>
+      </div>
+
+      {% if messages %}
+        {% for m in messages %}
+            <div class="alert alert-success">{{ m }}</div>
+        {% endfor %}
+      {% endif %}
+
+      {% if comment %}
+        {% for c in comment %}
+        <div class="comment">
+          <p>{{ c.name }}</p> 
+          <p>{{ c.comment }}</p> 
+        </div>
+        {% endfor %}
+      {% endif %}
+      <form method="POST" style="text-align: left;">
+        <div class="form-group">
+          <label for="">Name</label>
+          <input type="text" name="name" required class="form-control" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+          <label for="">Comment</label>
+         <textarea name="comment" class="form-control"></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Comment">
+        {% csrf_token %}
+        
+      </form>
+
+  </div>
+    {% endif %}
+    
+    {% include 'cms_app/sidebar.html' %}
+    <!-- END OF ASIDE CONTENT -->
+  </div>
+</section>
+
+{% endblock %}

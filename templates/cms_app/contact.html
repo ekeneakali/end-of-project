@@ -1,0 +1,88 @@
+{% extends 'cms_app/base.html' %}
+{% load static %}
+
+{% block title %}
+Contact
+{% endblock %}
+
+{% block content %}
+
+<section id="sectionTitle">
+  <div class="pageTitle">
+    <h1>Contact</h1>
+  </div>
+</section>
+<!-- END OF PAGE TITLE -->
+<section id="content">
+  <div class="row">
+    <div class="col-sm-9 text-center" id="mainContent">
+      <div class="row">
+        <div class="col-sm-12">
+          {% if messages %}
+              {% for m in messages %}
+                  <div class="alert alert-success">{{ m }}</div>
+              {% endfor %}
+          {% endif %}
+          <form class="form" method="post" enctype="multipart/form-data">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="labelName">Name</label>
+                  <input type="text" name="name" id="labelName" placeholder="Your Name" class="form-control">
+                </div>
+              </div>
+              <!-- END OF NAME -->
+             <div class="col-sm-6">
+                <div class="form-group">
+                 <label for="labelPhone">Phone No</label>
+                 <input type="text" name="phone" id="labelPhone" placeholder="Your Phone" class="form-control">
+               </div>
+             </div>
+             <!-- END OF PHONE -->
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="labelEmail">Email</label>
+                  <input type="text" name="email" id="labelEmail" class="form-control" placeholder="Your Email">
+                </div>
+              </div>
+              <!-- END OF EMAIL -->
+             <div class="col-sm-6">
+                <div class="form-group">
+                 <label for="labelReferer">Referer</label>
+                 <select id="labelReferer" class="form-control" name="referer">
+                    <option value="Facebook">Facebook</option>
+                    <option value="Twitter">Twitter</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Nairaland">Nairaland</option>
+                   <option value="" selected>Please Choose</option>
+                 </select>
+               </div>
+             </div>
+             <!-- END OF REFERER -->
+            </div>
+           
+            <!-- END OF GENDER -->
+           
+           
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="labelMessage">Message</label>
+                  <textarea name="message" id="labelMessage" class="form-control"> </textarea>
+                </div>
+              </div>
+              <input type="submit" name="send" value="Send" class="btn btn-primary">
+            </div>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+     
+    </div>
+    {% include 'cms_app/sidebar.html' %}
+  </div>
+</section>
+
+{% endblock %}
